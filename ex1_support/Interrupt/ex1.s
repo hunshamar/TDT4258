@@ -116,6 +116,31 @@ _reset:
 	str r6, [r3, #GPIO_DOUT]
 	ldr r10, =0x0400
 	str r10, [r2, #GPIO_DOUT]
+
+    // setup interupt controller
+    //ISERO
+    ldr r7, =0x802
+    ldr r8, =ISERO
+    str r7, [r8]
+
+	// sett GPIO interupts
+	ldr r7, =0x22222222
+	ldr r8, =GPIO_BASE
+	str r7, [r8, #GPIO_EXTIPSELL]
+
+
+	// sett 1->0 transition
+	ldr r7, =0xff
+	str r7, [r8, #GPIO_EXTIFALL]
+
+	// sett 0->1 transtion
+	str r7, [r8, #GPIO_EXTIRISE]
+
+	// enable interupt generation
+	str r7, [r8, #GPIO_IEN]
+
+
+
 	b top
 
 top:
@@ -137,7 +162,7 @@ ill:
 	b top
 
 del:
-	ldr r11, =0xAA00
+	ldr r11, =0xFF00
 	str r11, [r2, #GPIO_DOUT]
 
 	b top
@@ -161,13 +186,4 @@ dummy_handler:
         b .  // do nothing
 
 	.thumb_func
-Setup:
 	
-
-
-
-.section .data
-vars:
-	.word 0x2 // 0x2
-	.word 0x55555555 //
-

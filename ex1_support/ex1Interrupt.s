@@ -116,6 +116,13 @@ _reset:
 	str r6, [r3, #GPIO_DOUT]
 	ldr r10, =0x0400
 	str r10, [r2, #GPIO_DOUT]
+
+    // setup interupt controller
+    //ISERO
+    ldr r7, =0x802
+    ldr r8, =ISERO
+    str r7, []
+
 	b top
 
 top:
@@ -161,15 +168,4 @@ dummy_handler:
         b .  // do nothing
 
 	.thumb_func
-Setup:
-	
-
-
-
-.section .data
-vars:
-	.word 0x2 // 0x2
-	.word 0x55555555 //
-	
-	
 	
