@@ -145,6 +145,10 @@ main_loop:
 
 	cmp r7, 0b01111111
 	beq ill_led_8	
+
+
+	cmp r7, 0b11111111
+	beq del_all	
 	
 	b main_loop
 	
@@ -193,6 +197,13 @@ ill_led_7:
 
 ill_led_8:
 	ldr r11, = 0x7F00
+	str r11, [r2, #GPIO_DOUT]
+
+	b main_loop
+
+
+del_all:
+	ldr r11, = 0xFF00
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
