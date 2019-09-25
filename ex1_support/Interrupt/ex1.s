@@ -177,6 +177,17 @@ del:
         .thumb_func
 gpio_handler:  
 
+	// clear the GPIO_IFC Register
+	ldr r9, [=GPIO_BASE, #GPIO_IF]
+	str r9, [=GPIO_BASE, #GPIO_IFC]
+
+	// read buttonstatus
+	ldr r10, [r3, #GPIO_DIN]
+	lsl r10, r10, #8
+	str r10, [r2, #GPIO_DOUT]
+
+	bx r14
+
 	      b .  // do nothing
 	
 	/////////////////////////////////////////////////////////////////////////////
@@ -184,6 +195,4 @@ gpio_handler:
         .thumb_func
 dummy_handler:  
         b .  // do nothing
-
-	.thumb_func
 	
