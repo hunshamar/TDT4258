@@ -141,7 +141,7 @@ _reset:
 
 
 
-	b .
+	b
 	// b top
 
 top:
