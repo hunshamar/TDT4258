@@ -121,10 +121,10 @@ _reset:
 top:
 
 	ldr r7, [r3, #GPIO_DIN]
-	cmp r7, 0b11111011
+	cmp r7, 0b11111110
 	beq ill
 
-	cmp r7, 0b11110111
+	cmp r7, 0b11111101
 	beq del
 	
 	b top
@@ -137,7 +137,7 @@ ill:
 	b top
 
 del:
-	ldr r11, =0xFF00
+	ldr r11, =0xAA00
 	str r11, [r2, #GPIO_DOUT]
 
 	b top
@@ -170,6 +170,4 @@ Setup:
 vars:
 	.word 0x2 // 0x2
 	.word 0x55555555 //
-	
-	
-	
+

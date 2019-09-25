@@ -11,6 +11,7 @@ ASFLAGS=-mcpu=cortex-m3 -mthumb -g
 
 LINKERSCRIPT=efm32gg.ld
 
+FILENAME = ex1Polling.s
 
 ex1.bin : ex1.elf
 	${OBJCOPY} -j .text -O binary $< $@

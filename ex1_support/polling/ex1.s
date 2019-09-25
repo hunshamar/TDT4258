@@ -116,32 +116,90 @@ _reset:
 	str r6, [r3, #GPIO_DOUT]
 	ldr r10, =0x0400
 	str r10, [r2, #GPIO_DOUT]
-	b top
+	b main_loop
 
-top:
+main_loop:
 
 	ldr r7, [r3, #GPIO_DIN]
+
 	cmp r7, 0b11111110
-	beq ill
+	beq ill_led_1
 
 	cmp r7, 0b11111101
-	beq del
+	beq ill_led_2
+
+	cmp r7, 0b11111011
+	beq ill_led_3
+
+	cmp r7, 0b11110111
+	beq ill_led_4
+
+	cmp r7, 0b11101111
+	beq ill_led_5
+
+	cmp r7, 0b11011111
+	beq ill_led_6
+
+	cmp r7, 0b10111111
+	beq ill_led_7
+
+	cmp r7, 0b01111111
+	beq ill_led_8	
 	
-	b top
+	b main_loop
 	
 
-ill:
-	ldr r11, = 0x0000
+ill_led_1:
+	ldr r11, = 0xFE00
 	str r11, [r2, #GPIO_DOUT]
 
-	b top
-
-del:
-	ldr r11, =0xFF00
+	b main_loop
+	
+ill_led_2:
+	ldr r11, = 0xFD00
 	str r11, [r2, #GPIO_DOUT]
 
-	b top
+	b main_loop
+
+ill_led_3:
+	ldr r11, = 0xFB00
+	str r11, [r2, #GPIO_DOUT]
+
+	b main_loop
+
+ill_led_4:
+	ldr r11, = 0xF700
+	str r11, [r2, #GPIO_DOUT]
+
+	b main_loop
+
+ill_led_5:
+	ldr r11, = 0xEF00
+	str r11, [r2, #GPIO_DOUT]
+
+	b main_loop
+
+ill_led_6:
+	ldr r11, = 0xDF00
+	str r11, [r2, #GPIO_DOUT]
+
+	b main_loop
+
+ill_led_7:
+	ldr r11, = 0xBF00
+	str r11, [r2, #GPIO_DOUT]
+
+	b main_loop
+
+ill_led_8:
+	ldr r11, = 0x7F00
+	str r11, [r2, #GPIO_DOUT]
+
+	b main_loop
+
+
 	
+
 	/////////////////////////////////////////////////////////////////////////////
 	//
   // GPIO handler
