@@ -121,6 +121,13 @@ _reset:
 main_loop:
 
 	ldr r7, [r3, #GPIO_DIN]
+	LSL r7, r7, #8
+	str r7, [r2, #GPIO_DOUT]
+
+
+	b main_loop
+
+	ldr r7, [r3, #GPIO_DIN]
 
 	cmp r7, 0b11111110
 	beq ill_led_1
