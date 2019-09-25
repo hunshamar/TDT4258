@@ -160,43 +160,43 @@ ill_led_1:
 	b main_loop
 	
 ill_led_2:
-	ldr r11, = 0xFD00
+	ldr r11, = 0xFC00
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
 
 ill_led_3:
-	ldr r11, = 0xFB00
+	ldr r11, = 0xF800
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
 
 ill_led_4:
-	ldr r11, = 0xF700
+	ldr r11, = 0xF000
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
 
 ill_led_5:
-	ldr r11, = 0xEF00
+	ldr r11, = 0xE000
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
 
 ill_led_6:
-	ldr r11, = 0xDF00
+	ldr r11, = 0xC000
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
 
 ill_led_7:
-	ldr r11, = 0xBF00
+	ldr r11, = 0x8000
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
 
 ill_led_8:
-	ldr r11, = 0x7F00
+	ldr r11, = 0x0000
 	str r11, [r2, #GPIO_DOUT]
 
 	b main_loop
