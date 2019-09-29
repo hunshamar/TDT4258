@@ -142,23 +142,14 @@ _reset:
 
 
 
-	b top
+	b .
+	// b top
+
 
 top:
 
-	; ldr r7, [r3, #GPIO_DIN]
-	; cmp r7, 0b11111110
-	; beq ill
-
-	; cmp r7, 0b11111101
-	; beq del
 	
-	; b top
-	// read buttonstatus
-
-	ldr r10, [r3, #GPIO_DIN]
-	lsl r10, r10, #8
-	str r10, [r2, #GPIO_DOUT]
+	
 
 ill:
 	ldr r11, = 0x0000
@@ -190,7 +181,12 @@ gpio_handler:
 	// ldr r9, [=GPIO_BASE, #GPIO_IF]
 	// str r9, [=GPIO_BASE, #GPIO_IFC]
 
-	
+	// read buttonstatus
+
+	ldr r10, [r3, #GPIO_DIN]
+	lsl r10, r10, #8
+	str r10, [r2, #GPIO_DOUT]
+
 
 
 	bx r14
