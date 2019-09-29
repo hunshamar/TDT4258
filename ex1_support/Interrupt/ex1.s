@@ -120,7 +120,7 @@ _reset:
     // setup interupt controller
     //ISERO
     ldr r7, =0x802
-    ldr r8, =ISERO
+    ldr r8, =ISER0
     str r7, [r8]
 
 	// sett GPIO interupts
@@ -141,7 +141,8 @@ _reset:
 
 
 
-	b top
+	b .
+	// b top
 
 top:
 
@@ -179,6 +180,8 @@ gpio_handler:
 
 	// clear the GPIO_IFC Register
 	ldr r9, =GPIO_BASE
+	ldr r10, [r9, #GPIO_IF]
+	str r10, [r9, #GPIO_IFC]
 	
 	// ldr r9, [=GPIO_BASE, #GPIO_IF]
 	// str r9, [=GPIO_BASE, #GPIO_IFC]
@@ -187,6 +190,7 @@ gpio_handler:
 	ldr r10, [r3, #GPIO_DIN]
 	lsl r10, r10, #8
 	str r10, [r2, #GPIO_DOUT]
+
 
 	bx r14
 
