@@ -178,8 +178,10 @@ del:
 gpio_handler:  
 
 	// clear the GPIO_IFC Register
-	ldr r9, [=GPIO_BASE, #GPIO_IF]
-	str r9, [=GPIO_BASE, #GPIO_IFC]
+	ldr r9, =GPIO_BASE
+	
+	// ldr r9, [=GPIO_BASE, #GPIO_IF]
+	// str r9, [=GPIO_BASE, #GPIO_IFC]
 
 	// read buttonstatus
 	ldr r10, [r3, #GPIO_DIN]
