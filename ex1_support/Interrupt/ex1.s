@@ -142,11 +142,19 @@ _reset:
 
 
 
-	b .
+	b top
 	// b top
 
 
 top:
+	// skriv 6 til et register
+	ldr r11, =0x6
+	// hent SCR
+	ldr r12, =SCR
+	// lagre 6 til SCR-registeret
+	str r11, [r12]
+	//kjør intstruksjon wfi
+	wfi
 
 	
 	
