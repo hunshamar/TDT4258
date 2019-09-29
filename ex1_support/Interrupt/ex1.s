@@ -82,7 +82,8 @@
 	      .type   _reset, %function
         .thumb_func
 _reset: 
-	// start gpioklokke
+
+	// start GPIO clock
 	ldr r4, =CMU_BASE
 	ldr r5, [r4, #CMU_HFPERCLKEN0]
 
@@ -97,25 +98,22 @@ _reset:
 	ldr r2, =GPIO_PA_BASE
 	str r1, [r2, #GPIO_CTRL]
 
-	// sett output på pins 8-15
+	// sett output on pins 8-15
 	ldr r3, =0x55555555
 	str r3, [r2, #GPIO_MODEH]
 
-	// skriv ledverdier til bla
-	// testfor lys
-	//ldr r6, =0xff00
-	ldr r6, =0b1011010100000000
-	str r6, [r2, #GPIO_DOUT]
 
-	// setup for knapper
+	// setup for buttons
 	ldr r6, =0x33333333
 	ldr r3, =GPIO_PC_BASE
 	str r6, [r3, #GPIO_MODEL]
 	// sett internal pull-up
+
 	ldr r6, =0xff
 	str r6, [r3, #GPIO_DOUT]
 	ldr r10, =0x0400
 	str r10, [r2, #GPIO_DOUT]
+
 
     // setup interupt controller
     //ISERO
@@ -147,30 +145,16 @@ _reset:
 
 
 top:
-	// skriv 6 til et register
+	// Write 6 to SCR register to enable low energy mode 2
 	ldr r11, =0x6
-	// hent SCR
 	ldr r12, =SCR
-	// lagre 6 til SCR-registeret
 	str r11, [r12]
-	//kjør intstruksjon wfi
+
+	//Run wfi function
 	wfi
 
 	
-	
 
-ill:
-	ldr r11, = 0x0000
-	str r11, [r2, #GPIO_DOUT]
-
-	b top
-
-del:
-	ldr r11, =0xFF00
-	str r11, [r2, #GPIO_DOUT]
-
-	b top
-	
 	/////////////////////////////////////////////////////////////////////////////
 	//
   // GPIO handler
@@ -185,9 +169,6 @@ gpio_handler:
 	ldr r9, =GPIO_BASE
 	ldr r10, [r9, #GPIO_IF]
 	str r10, [r9, #GPIO_IFC]
-	
-	// ldr r9, [=GPIO_BASE, #GPIO_IF]
-	// str r9, [=GPIO_BASE, #GPIO_IFC]
 
 	// read buttonstatus
 

@@ -82,7 +82,8 @@
 	      .type   _reset, %function
         .thumb_func
 _reset: 
-	// start gpioklokke
+	
+	// start GPIO clock
 	ldr r4, =CMU_BASE
 	ldr r5, [r4, #CMU_HFPERCLKEN0]
 
@@ -97,126 +98,32 @@ _reset:
 	ldr r2, =GPIO_PA_BASE
 	str r1, [r2, #GPIO_CTRL]
 
-	// sett output på pins 8-15
+	// sett output on pins 8-15
 	ldr r3, =0x55555555
 	str r3, [r2, #GPIO_MODEH]
 
-	// skriv ledverdier til bla
-	// testfor lys
-	//ldr r6, =0xff00
-	ldr r6, =0b1011010100000000
-	str r6, [r2, #GPIO_DOUT]
 
-	// setup for knapper
+	// setup for buttons
 	ldr r6, =0x33333333
 	ldr r3, =GPIO_PC_BASE
 	str r6, [r3, #GPIO_MODEL]
 	// sett internal pull-up
+	
 	ldr r6, =0xff
 	str r6, [r3, #GPIO_DOUT]
 	ldr r10, =0x0400
 	str r10, [r2, #GPIO_DOUT]
+
 	b main_loop
 
 main_loop:
 
-	ldr r7, [r3, #GPIO_DIN]
-	LSL r7, r7, #8
-	str r7, [r2, #GPIO_DOUT]
+	ldr r7, [r3, #GPIO_DIN] // Load button input into r7
+	LSL r7, r7, #8 // Left shift r7 8 times
+	str r7, [r2, #GPIO_DOUT] // Load r7 into r2, LED output
 
 
 	b main_loop
-
-	ldr r7, [r3, #GPIO_DIN]
-
-	cmp r7, 0b11111110
-	beq ill_led_1
-
-	cmp r7, 0b11111101
-	beq ill_led_2
-
-	cmp r7, 0b11111011
-	beq ill_led_3
-
-	cmp r7, 0b11110111
-	beq ill_led_4
-
-	cmp r7, 0b11101111
-	beq ill_led_5
-
-	cmp r7, 0b11011111
-	beq ill_led_6
-
-	cmp r7, 0b10111111
-	beq ill_led_7
-
-	cmp r7, 0b01111111
-	beq ill_led_8	
-
-
-	cmp r7, 0b11111111
-	beq del_all	
-	
-	b main_loop
-	
-
-ill_led_1:
-	ldr r11, = 0xFE00
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-	
-ill_led_2:
-	ldr r11, = 0xFC00
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-ill_led_3:
-	ldr r11, = 0xF800
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-ill_led_4:
-	ldr r11, = 0xF000
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-ill_led_5:
-	ldr r11, = 0xE000
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-ill_led_6:
-	ldr r11, = 0xC000
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-ill_led_7:
-	ldr r11, = 0x8000
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-ill_led_8:
-	ldr r11, = 0x0000
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-
-del_all:
-	ldr r11, = 0xFF00
-	str r11, [r2, #GPIO_DOUT]
-
-	b main_loop
-
-
-	
 
 	/////////////////////////////////////////////////////////////////////////////
 	//
@@ -239,11 +146,4 @@ dummy_handler:
 	.thumb_func
 Setup:
 	
-
-
-
-.section .data
-vars:
-	.word 0x2 // 0x2
-	.word 0x55555555 //
 
