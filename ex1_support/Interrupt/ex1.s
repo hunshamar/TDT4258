@@ -139,8 +139,6 @@ _reset:
 	// enable interupt generation
 	str r7, [r8, #GPIO_IEN]
 
-
-
 	b .
 	// b top
 
