@@ -141,7 +141,7 @@ _reset:
 
 
 
-	b .
+	b top
 	// b top
 
 top:
@@ -155,7 +155,7 @@ top:
 	
 	; b top
 	// read buttonstatus
-	
+
 	ldr r10, [r3, #GPIO_DIN]
 	lsl r10, r10, #8
 	str r10, [r2, #GPIO_DOUT]
