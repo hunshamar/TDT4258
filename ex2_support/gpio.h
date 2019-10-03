@@ -10,4 +10,4 @@ void illuminate_LED(uint8_t pin);
 
 void dilluminate_LED(uint8_t pin);
 
-void button_pressed(uint8_t button_number){
+int button_pressed(uint8_t button_number){
