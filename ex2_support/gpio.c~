@@ -24,12 +24,7 @@ void setupGPIO()
 	*GPIO_PA_DOUT = 0xFF00;	/* turn on LEDs D4-D8 (LEDs are active
 				 * low) */
 	
-<<<<<<< HEAD
-	illuminate_LED(3);
 
-	while(!button_pressed(3)){
-		//wait until button press
-=======
 	illuminate_LED(5);
 	while(1){
 		if (button_pressed(1)){
@@ -44,8 +39,6 @@ void setupGPIO()
 		if (button_pressed(4)){
 			illuminate_LED(3);
 		}
-		
->>>>>>> 6eb26c06e0f050231ed998c36f2bbf2cba76f201
 	}
 
 }

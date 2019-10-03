@@ -52,10 +52,7 @@ void dilluminate_LED(uint8_t led_number){
 }
 
 int button_pressed(uint8_t button_number){
-<<<<<<< HEAD
-	int a = ~(*GPIO_PC_DIN) & 1 << button_number;
-	return a;
-=======
+
 	return ~(*GPIO_PC_DIN) & 1 << button_number+1; // +1 because button 0 is called button 1
->>>>>>> 6eb26c06e0f050231ed998c36f2bbf2cba76f201
+
 }
