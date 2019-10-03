@@ -10,7 +10,7 @@ void setupGPIO()
 	/*
 	 * TODO set input and output pins for the joystick 
 	 */
-
+	*GPIO_PA_MODEL = 0x33333333;
 
 	/*
 	 * Example of HW access from C code: turn on joystick LEDs D4-D8 check 
@@ -22,10 +22,20 @@ void setupGPIO()
 	*GPIO_PA_DOUT = 0xFF00;	/* turn on LEDs D4-D8 (LEDs are active
 				 * low) */
 	
+	illuminate_LED(3);
+	while(*GPIO_PA_DIN = 0xff){
+		//wait 
+	}
 	illuminate_LED(0);
+
+	illuminate_LED(1);
 
 }
 
 void illuminate_LED(uint8_t pin){
 	*GPIO_PA_DOUT &= ~( (1 << pin) << 8 );
+}
+
+void dilluminate_LED(uint8_t pin){
+	*GPIO_PA_DOUT |= (1 << pin ) << 8;
 }
