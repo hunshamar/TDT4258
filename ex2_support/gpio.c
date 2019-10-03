@@ -1,7 +1,6 @@
-#include <stdint.h>
-#include <stdbool.h>
 
-#include "efm32gg.h"
+
+#include "gpio.h"
 
 /*
  * function to set up GPIO mode and interrupts
@@ -22,6 +21,9 @@ void setupGPIO()
 	*GPIO_PA_MODEH = 0x55555555;	/* set pins A8-15 as output */
 	*GPIO_PA_DOUT = 0xFF00;	/* turn on LEDs D4-D8 (LEDs are active
 				 * low) */
+	
+	illuminate_LED(3);
+
 }
 
 void illuminate_LED(uint8_t pin){
