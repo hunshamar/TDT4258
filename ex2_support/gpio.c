@@ -24,13 +24,22 @@ void setupGPIO()
 	*GPIO_PA_DOUT = 0xFF00;	/* turn on LEDs D4-D8 (LEDs are active
 				 * low) */
 	
-	illuminate_LED(3);
-	while(!button_pressed(3)){
-		//wait until button press
+	illuminate_LED(5);
+	while(1){
+		if (button_pressed(1)){
+			illuminate_LED(0);
+		}
+		if (button_pressed(2)){
+			illuminate_LED(1);
+		}
+		if (button_pressed(3)){
+			illuminate_LED(2);
+		}
+		if (button_pressed(4)){
+			illuminate_LED(3);
+		}
+		
 	}
-	illuminate_LED(0);
-
-	illuminate_LED(1);
 
 }
 
@@ -43,5 +52,5 @@ void dilluminate_LED(uint8_t led_number){
 }
 
 int button_pressed(uint8_t button_number){
-	return ~(*GPIO_PC_DIN) & 1 << button_number;
+	return ~(*GPIO_PC_DIN) & 1 << button_number+1; // +1 because button 0 is called button 1
 }
