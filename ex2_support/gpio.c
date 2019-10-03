@@ -11,7 +11,7 @@ void setupGPIO()
 	 * TODO set input and output pins for the joystick 
 	 */
 	*GPIO_PC_MODEL = 0x33333333; // Set buttons as inputs
-    *GPIO_PC_DOUT = 0xFF; /* Enable internal pull-up*/
+    *GPIO_PC_DOUT = 0xFF; // Enable internal pull-up
 
 
 	/*
@@ -25,7 +25,7 @@ void setupGPIO()
 				 * low) */
 	
 	illuminate_LED(3);
-	while(*GPIO_PC_DIN = 0xffff){
+	while(!button_pressed(3)){
 		//wait until button press
 	}
 	illuminate_LED(0);
@@ -34,10 +34,14 @@ void setupGPIO()
 
 }
 
-void illuminate_LED(uint8_t pin){
-	*GPIO_PA_DOUT &= ~( (1 << pin) << 8 );
+void illuminate_LED(uint8_t led_number){
+	*GPIO_PA_DOUT &= ~( (1 << led_number) << 8 );
 }
 
-void dilluminate_LED(uint8_t pin){
-	*GPIO_PA_DOUT |= (1 << pin ) << 8;
+void dilluminate_LED(uint8_t led_number){
+	*GPIO_PA_DOUT |= (1 << led_number ) << 8;
+}
+
+void button_pressed(uint8_t button_number){
+	return ~(*GPIO_PC_DIN) & 1 << button_number;
 }
