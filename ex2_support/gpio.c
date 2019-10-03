@@ -22,7 +22,7 @@ void setupGPIO()
 	*GPIO_PA_DOUT = 0xFF00;	/* turn on LEDs D4-D8 (LEDs are active
 				 * low) */
 	
-	illuminate_LED(3);
+	illuminate_LED(0);
 
 }
 
