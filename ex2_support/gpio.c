@@ -11,6 +11,8 @@ void setupGPIO()
 	 * TODO set input and output pins for the joystick 
 	 */
 	*GPIO_PC_MODEL = 0x33333333; // Set buttons as inputs
+    *GPIO_PC_DOUT = 0xFF; /* Enable internal pull-up*/
+
 
 	/*
 	 * Example of HW access from C code: turn on joystick LEDs D4-D8 check 
@@ -24,7 +26,7 @@ void setupGPIO()
 	
 	illuminate_LED(3);
 	while(*GPIO_PC_DIN = 0xffff){
-		//wait 
+		//wait until button press
 	}
 	illuminate_LED(0);
 
