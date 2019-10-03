@@ -25,7 +25,7 @@ void setupGPIO()
 				 * low) */
 	
 	illuminate_LED(3);
-	while(*GPIO_PC_DIN = 0xffff){
+	while((*GPIO_PC_DIN & 0xff ) == 0xff){
 		//wait until button press
 	}
 	illuminate_LED(0);
