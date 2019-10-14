@@ -1,5 +1,8 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <time.h> 
 
 #include "efm32gg.h"
 #include "gpio.h"
@@ -44,15 +47,20 @@ int main(void)
 	 * TODO for higher energy efficiency, sleep while waiting for
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
+	
+	int lower = 0;
+	int upper = 65536;
+
+
 	while (1){
 		
 		uint16_t sound1;
-		sound1 = 0x0abc;
+		sound1 = rand() % (upper - lower +1 ) + lower;
 
 		uint16_t sound2;
-		sound2 = 0x01ff;
+		sound2 = sound1; 
 
-		_delay_ms(10);
+		//_delay_ms(10);
 
 		*DAC0_CH0DATA = sound1;
 		*DAC0_CH1DATA = sound2;
