@@ -1,8 +1,13 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <time.h> 
 
 #include "efm32gg.h"
 #include "gpio.h"
+#include "timer.h"
+#include "dac.h"
 
 
 /*
@@ -19,8 +24,6 @@
 /*
  * Declaration of peripheral setup functions 
  */
-void setupTimer(uint32_t period);
-void setupDAC();
 void setupNVIC();
 
 /*
@@ -44,7 +47,41 @@ int main(void)
 	 * TODO for higher energy efficiency, sleep while waiting for
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
-	while (1) ;
+	
+	int lower = 0;
+	int upper = 65536;
+
+
+	while (1){
+		
+		uint16_t sound1;
+		sound1 = rand() % (upper - lower +1 ) + lower;
+
+		uint16_t sound2;
+		sound2 = sound1; 
+
+		//_delay_ms(10);
+
+		*DAC0_CH0DATA = sound1;
+		*DAC0_CH1DATA = sound2;
+
+
+		if (button_pressed(1)){
+			illuminate_LED(0);
+		}
+		if (button_pressed(2)){
+			illuminate_LED(1);
+		}
+		if (button_pressed(3)){
+			illuminate_LED(2);
+		}
+		if (button_pressed(4)){
+			illuminate_LED(3);
+		}
+
+
+
+	}
 
 	return 0;
 }
