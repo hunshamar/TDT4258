@@ -1,7 +1,4 @@
-#include <stdint.h>
-#include <stdbool.h>
-
-#include "efm32gg.h"
+#include "dac.h"
 
 void setupDAC()
 {
