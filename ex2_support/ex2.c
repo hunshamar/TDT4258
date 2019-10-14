@@ -66,6 +66,20 @@ int main(void)
 		*DAC0_CH1DATA = sound2;
 
 
+		if (button_pressed(1)){
+			illuminate_LED(0);
+		}
+		if (button_pressed(2)){
+			illuminate_LED(1);
+		}
+		if (button_pressed(3)){
+			illuminate_LED(2);
+		}
+		if (button_pressed(4)){
+			illuminate_LED(3);
+		}
+
+
 
 	}
 
