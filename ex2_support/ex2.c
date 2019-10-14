@@ -51,10 +51,10 @@ int main(void)
 	int sound1 = 500;
 	while (1){
 		
-		sound1 += 5;
+		sound1 += 2;
 		int sound2 = sound1;
 
-		if (sound1 >= 100){
+		if (sound1 >= 1000){
 			sound1 = 0;
 		}
 
