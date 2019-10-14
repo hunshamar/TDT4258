@@ -48,13 +48,13 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 	
-	int sound1 = 0;
+	int sound1 = 500;
 	while (1){
 		
 		sound1 += 5;
 		int sound2 = sound1;
 
-		if (sound1 == 1500){
+		if (sound1 >= 100){
 			sound1 = 0;
 		}
 
