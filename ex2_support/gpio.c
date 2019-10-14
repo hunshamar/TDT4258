@@ -25,7 +25,7 @@ void setupGPIO()
 				 * low) */
 	
 	illuminate_LED(5);
-	while(1){
+	while(0){
 		if (button_pressed(1)){
 			illuminate_LED(0);
 		}
