@@ -51,13 +51,15 @@ int main(void)
 	int sound1 = 1000;
 	while (1){
 		
-		sound1 += 100;
+		//sound1 += 100;
 		int sound2 = sound1;
 
 		//_delay_ms(10);
 
 		*DAC0_CH0DATA = sound1;
 		*DAC0_CH1DATA = sound2;
+
+
 
 
 		if (button_pressed(1)){
