@@ -48,17 +48,11 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 	
-	int lower = 0;
-	int upper = 65536;
-
-
+	int sound1 = 1000;
 	while (1){
 		
-		uint16_t sound1;
-		sound1 = rand() % (upper - lower +1 ) + lower;
-
-		uint16_t sound2;
-		sound2 = sound1; 
+		sound1 += 100;
+		int sound2 = sound1;
 
 		//_delay_ms(10);
 
