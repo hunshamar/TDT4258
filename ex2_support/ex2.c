@@ -48,11 +48,15 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 	
-	int sound1 = 1000;
+	int sound1 = 0;
 	while (1){
 		
-		//sound1 += 100;
+		sound1 += 5;
 		int sound2 = sound1;
+
+		if (sound1 == 1500){
+			sound1 = 0;
+		}
 
 		//_delay_ms(10);
 
