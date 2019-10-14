@@ -51,17 +51,17 @@ int main(void)
 	int sound1 = 500;
 	while (1){
 		
-		sound1 += 2;
-		int sound2 = sound1;
+		// sound1 += 2;
+		// int sound2 = sound1;
 
-		if (sound1 >= 1000){
-			sound1 = 0;
-		}
+		// if (sound1 >= 1000){
+		// 	sound1 = 0;
+		// }
 
-		//_delay_ms(10);
+		// //_delay_ms(10);
 
-		*DAC0_CH0DATA = sound1;
-		*DAC0_CH1DATA = sound2;
+		// *DAC0_CH0DATA = sound1;
+		// *DAC0_CH1DATA = sound2;
 
 
 
