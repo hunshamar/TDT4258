@@ -5,7 +5,7 @@
 #include "efm32gg.h"
 
 uint16_t sound_0 = 0;
-uint16_t sound_0 = 0;
+uint16_t sound_1 = 0;
 double time = 0.0;
 double period_c_note = 0.0038222;
 
