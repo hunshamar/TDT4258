@@ -48,22 +48,22 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 	
-	int lower = 0;
-	int upper = 65536;
-
-
+	int sound1 = 500;
 	while (1){
 		
-		uint16_t sound1;
-		sound1 = rand() % (upper - lower +1 ) + lower;
+		sound1 += 2;
+		int sound2 = sound1;
 
-		uint16_t sound2;
-		sound2 = sound1; 
+		if (sound1 >= 1000){
+			sound1 = 0;
+		}
 
 		//_delay_ms(10);
 
 		*DAC0_CH0DATA = sound1;
 		*DAC0_CH1DATA = sound2;
+
+
 
 
 		if (button_pressed(1)){

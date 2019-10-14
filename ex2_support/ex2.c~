@@ -1,7 +1,14 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <time.h> 
 
 #include "efm32gg.h"
+#include "gpio.h"
+#include "timer.h"
+#include "dac.h"
+
 
 /*
  * TODO calculate the appropriate sample period for the sound wave(s) you 
@@ -17,8 +24,6 @@
 /*
  * Declaration of peripheral setup functions 
  */
-void setupTimer(uint32_t period);
-void setupDAC();
 void setupNVIC();
 
 /*
@@ -26,37 +31,71 @@ void setupNVIC();
  */
 int main(void)
 {
-    /*
-     * Call the peripheral setup functions 
-     */
-    setupGPIO();
-    setupDAC();
-    setupTimer(SAMPLE_PERIOD);
+	/*
+	 * Call the peripheral setup functions 
+	 */
+	setupGPIO();
+	setupDAC();
+	setupTimer(SAMPLE_PERIOD);
 
-    /*
-     * Enable interrupt handling 
-     */
-    setupNVIC();
+	/*
+	 * Enable interrupt handling 
+	 */
+	setupNVIC();
 
-    /*
-     * TODO for higher energy efficiency, sleep while waiting for
-     * interrupts instead of infinite loop for busy-waiting 
-     */
-    while (1);
+	/*
+	 * TODO for higher energy efficiency, sleep while waiting for
+	 * interrupts instead of infinite loop for busy-waiting 
+	 */
+	
+	int lower = 0;
+	int upper = 65536;
 
-    return 0;
+
+	while (1){
+		
+		uint16_t sound1;
+		sound1 = 300;
+
+		uint16_t sound2;
+		sound2 = sound1; 
+
+		//_delay_ms(10);
+
+		*DAC0_CH0DATA = sound1;
+		*DAC0_CH1DATA = sound2;
+
+
+		if (button_pressed(1)){
+			illuminate_LED(0);
+		}
+		if (button_pressed(2)){
+			illuminate_LED(1);
+		}
+		if (button_pressed(3)){
+			illuminate_LED(2);
+		}
+		if (button_pressed(4)){
+			illuminate_LED(3);
+		}
+
+
+
+	}
+
+	return 0;
 }
 
 void setupNVIC()
 {
-    /*
-     * TODO use the NVIC ISERx registers to enable handling of
-     * interrupt(s) remember two things are necessary for interrupt
-     * handling: - the peripheral must generate an interrupt signal - the
-     * NVIC must be configured to make the CPU handle the signal You will
-     * need TIMER1, GPIO odd and GPIO even interrupt handling for this
-     * assignment. 
-     */
+	/*
+	 * TODO use the NVIC ISERx registers to enable handling of
+	 * interrupt(s) remember two things are necessary for interrupt
+	 * handling: - the peripheral must generate an interrupt signal - the
+	 * NVIC must be configured to make the CPU handle the signal You will
+	 * need TIMER1, GPIO odd and GPIO even interrupt handling for this
+	 * assignment. 
+	 */
 }
 
 /*
