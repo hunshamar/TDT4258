@@ -54,8 +54,9 @@ int main(void)
 
 	while (1){
 		
+		/*
 		uint16_t sound1;
-		sound1 = rand() % (upper - lower +1 ) + lower;
+		sound1 = 300;
 
 		uint16_t sound2;
 		sound2 = sound1; 
@@ -63,7 +64,7 @@ int main(void)
 		//_delay_ms(10);
 
 		*DAC0_CH0DATA = sound1;
-		*DAC0_CH1DATA = sound2;
+		*DAC0_CH1DATA = sound2;*/
 
 
 		if (button_pressed(1)){
