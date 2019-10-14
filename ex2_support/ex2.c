@@ -3,6 +3,8 @@
 
 #include "efm32gg.h"
 #include "gpio.h"
+#include "timer.h"
+#include "dac.h"
 
 
 /*
@@ -19,8 +21,6 @@
 /*
  * Declaration of peripheral setup functions 
  */
-void setupTimer(uint32_t period);
-void setupDAC();
 void setupNVIC();
 
 /*
@@ -44,7 +44,22 @@ int main(void)
 	 * TODO for higher energy efficiency, sleep while waiting for
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
-	while (1) ;
+	while (1){
+		
+		uint16_t sound1;
+		sound1 = 0x0abc;
+
+		uint16_t sound2;
+		sound2 = 0x01ff;
+
+		_delay_ms(10);
+
+		*DAC0_CH0DATA = sound1;
+		*DAC0_CH1DATA = sound2;
+
+
+
+	}
 
 	return 0;
 }
