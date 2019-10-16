@@ -25,7 +25,7 @@ void setupGPIO()
 				 * low) */
 	
 
-	while(1){
+	while(0){
 
 		for (int i = 0; i < 8; i++){
 			if (button_pressed(i)){
