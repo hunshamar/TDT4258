@@ -48,22 +48,22 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 	
-	int sound1 = 500;
+	int lower = 0;
+	int upper = 65536;
+
+
 	while (1){
 		
-		sound1 += 2;
-		int sound2 = sound1;
+		uint16_t sound1;
+		sound1 = rand() % (upper - lower +1 ) + lower;
 
-		if (sound1 >= 1000){
-			sound1 = 0;
-		}
+		uint16_t sound2;
+		sound2 = sound1; 
 
 		//_delay_ms(10);
 
 		*DAC0_CH0DATA = sound1;
 		*DAC0_CH1DATA = sound2;
-
-
 
 
 		if (button_pressed(1)){
@@ -88,6 +88,7 @@ int main(void)
 
 void setupNVIC()
 {
+	*ISER0 = 0x1802;	
 	/*
 	 * TODO use the NVIC ISERx registers to enable handling of
 	 * interrupt(s) remember two things are necessary for interrupt
