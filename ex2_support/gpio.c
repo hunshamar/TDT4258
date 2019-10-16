@@ -26,17 +26,13 @@ void setupGPIO()
 	
 
 	while(1){
-		if (button_pressed(0)){
-			illuminate_LED(0);
-		}
-		if (button_pressed(1)){
-			illuminate_LED(1);
-		}
-		if (button_pressed(2)){
-			illuminate_LED(2);
-		}
-		if (button_pressed(3)){
-			illuminate_LED(3);
+
+		for (int i = 0; i < 8; i++){
+			if (button_pressed(i)){
+				illuminate_LED(i);
+			}else{
+				dilluminate_LED(i);
+			}
 		}
 	}
 
