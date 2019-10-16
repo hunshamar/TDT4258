@@ -19,7 +19,7 @@
 /*
  * The period between sound samples, in clock cycles 
  */
-#define   SAMPLE_PERIOD   0
+#define   SAMPLE_PERIOD   317
 
 /*
  * Declaration of peripheral setup functions 
@@ -54,16 +54,25 @@ int main(void)
 
 	while (1){
 		
+<<<<<<< HEAD:ex2_support/ex2.c
 		uint16_t sound1;
 		sound1 = rand() % (upper - lower +1 ) + lower;
 
 		uint16_t sound2;
 		sound2 = sound1; 
+=======
+		// sound1 += 2;
+		// int sound2 = sound1;
 
-		//_delay_ms(10);
+		// if (sound1 >= 1000){
+		// 	sound1 = 0;
+		// }
+>>>>>>> 79709ec61e5783255f578572b5f1a5e3d693d014:ex2_support/main.c
 
-		*DAC0_CH0DATA = sound1;
-		*DAC0_CH1DATA = sound2;
+		// //_delay_ms(10);
+
+		// *DAC0_CH0DATA = sound1;
+		// *DAC0_CH1DATA = sound2;
 
 
 		if (button_pressed(1)){
