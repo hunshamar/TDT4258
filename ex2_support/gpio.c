@@ -1,6 +1,7 @@
 
 
 #include "gpio.h"
+#include <stdbool.h>
 
 /*
  * function to set up GPIO mode and interrupts
@@ -25,18 +26,17 @@ void setupGPIO()
 				 * low) */
 	
 
-	illuminate_LED(5);
-	while(0){
-		if (button_pressed(1)){
+	while(1){
+		if (button_pressed(0)){
 			illuminate_LED(0);
 		}
-		if (button_pressed(2)){
+		if (button_pressed(1)){
 			illuminate_LED(1);
 		}
-		if (button_pressed(3)){
+		if (button_pressed(2)){
 			illuminate_LED(2);
 		}
-		if (button_pressed(4)){
+		if (button_pressed(3)){
 			illuminate_LED(3);
 		}
 	}
@@ -51,7 +51,7 @@ void dilluminate_LED(uint8_t led_number){
 	*GPIO_PA_DOUT |= (1 << led_number ) << 8;
 }
 
-int button_pressed(uint8_t button_number){
+bool button_pressed(uint8_t button_number){
 
 	return ~(*GPIO_PC_DIN) & 1 << button_number-1; // +1 because button 0 is called button 1
 
