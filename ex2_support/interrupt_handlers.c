@@ -16,8 +16,8 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 {
 	*TIMER1_IFC = 1;
 	time += 0.000022643;//timer period in seconds
-	*DAC0_CH0CTRL = 500 + (int)round(500*sin(time*2*3.14/period_c_note));
-	*DAC0_CH1CTRL = 500 + (int)round(500*sin(time*2*3.14/period_c_note));
+	*DAC0_CH0CTRL = 500 + (int)round(500 * sin(time*2*3.14/period_c_note));
+	*DAC0_CH1CTRL = 500 + (int)round(500 * sin(time*2*3.14/period_c_note));
 
 
 	/*
