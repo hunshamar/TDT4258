@@ -45,11 +45,11 @@ int main(void)
 	// 	}
 	// }
 
-	setupNVIC();
-	setupDAC();
-	setupTimer(SAMPLE_PERIOD);
-	setupInterrupt();
-	setSleep(0b110);
+	NVIC_init();
+	DAC_init();
+	timer_init(SAMPLE_PERIOD);
+	interrupt_init();
+	set_sleep(0b110);
 	/*
 	 * TODO for higher energy efficiency, sleep while waiting for
 	 * interrupts instead of infinite loop for busy-waiting 
@@ -61,7 +61,7 @@ int main(void)
 	return 0;
 }
 
-void setupNVIC()
+void NVIC_init()
 {
 	*ISER0 = 0x1802;	
 	/*
@@ -74,7 +74,7 @@ void setupNVIC()
 	 */
 }
 
-void setSleep(int arg)
+void set_sleep(int arg)
 {
 	*SCR = arg;
 }

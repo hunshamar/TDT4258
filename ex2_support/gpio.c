@@ -5,7 +5,7 @@
 /*
  * function to set up GPIO mode and interrupts
  */
-void setupGPIO()
+void GPIO_init()
 {
 	/*
 	 * TODO set input and output pins for the joystick 
@@ -24,26 +24,22 @@ void setupGPIO()
 	*GPIO_PA_DOUT = 0xFF00;	/* turn on LEDs D4-D8 (LEDs are active low) */
 }
 
-void illuminate_LED(uint8_t led_number){
+void GPIO_illuminate_LED(uint8_t led_number){
 	*GPIO_PA_DOUT &= ~( (1 << led_number) << 8 );
 }
 
-void dilluminate_LED(uint8_t led_number){
+void GPIO_deluminate_LED(uint8_t led_number){
 	*GPIO_PA_DOUT |= (1 << led_number ) << 8;
 }
 
-bool button_pressed(uint8_t button_number){
+bool GPIO_button_pressed(uint8_t button_number){
 
 	return ~(*GPIO_PC_DIN) & 1 << button_number; // +1 because button 0 is called button 1
 }
 
 
 
-void toggle_LED(uint8_t led_number){
+void GPIO_toggle_LED(uint8_t led_number){
 	*GPIO_PA_DOUT ^= (1 << led_number) << 8;
 }
 
-void clear_interrupt() { 
-	*GPIO_IFC = *GPIO_IF; 	// clears the interrupt source, 
-							// if this is not done the interrupt will be called repeatedly after the first interrupt
-}

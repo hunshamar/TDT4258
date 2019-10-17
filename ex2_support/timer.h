@@ -6,6 +6,6 @@
 
 #include "efm32gg.h"
 
-void setupTimer(uint16_t period);
+void timer_init(uint16_t period);
 
 #endif

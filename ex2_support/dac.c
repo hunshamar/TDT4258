@@ -7,7 +7,7 @@
 #define MODE_BIT 	4
 
 
-void setupDAC()
+void DAC_init()
 {
 	*CMU_HFPERCLKEN0 |= (1 << DAC0_BIT); // Enable the DAC0 clock by setting bit 17 in CMU_HFPERCLKEN0
 	*DAC0_CTRL |= (PRESC << PRESC_BIT);  // Prescale DAC clock by writing 5 to pin 16-18
