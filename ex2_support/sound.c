@@ -85,6 +85,11 @@ void change_frequency(int delta_freq)
 void play_square()
 {
     time += 0.00002264285;
+    if (time > 1)
+    {
+        time = 0.0;
+        sound_type = 0;
+    }
     if(fmod(time, 1/frequency) > 1/(2*frequency))
     {
         *DAC0_CH0DATA = 0;
