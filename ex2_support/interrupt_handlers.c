@@ -101,5 +101,3 @@ void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
 	}
 	interrupt_clear();
 }
-
-
