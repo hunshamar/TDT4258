@@ -36,7 +36,7 @@ void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
 	}
 	else if (button_pressed(4))
 	{
-		change_frequency(10);
+		change_frequency(-10);
 	}
 	else if (button_pressed(5))
 	{
