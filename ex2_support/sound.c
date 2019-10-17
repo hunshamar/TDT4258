@@ -8,12 +8,13 @@ uint16_t amplitude = 100;
 uint8_t sound_type = 0;
 double time = 0.0;
 uint16_t sawtooth_val = 0;
-uint16_t frequency = 0;
+uint16_t frequency = 200;
 
 void play_sound()
 {
     switch(sound_type)
     {
+        time += 0.00002264285;
         case 0:
             *DAC0_CH0DATA = 0;
             *DAC0_CH1DATA = 0;
@@ -21,16 +22,18 @@ void play_sound()
             break;
         case 1:
             play_sine();
+            break;
         case 2:
             play_sawtooth();
+            break;
         case 3:
             play_square();
+            break;
     }
 }
 
 void play_sine()
 {
-    time += 0.00002264285;
     if (time > 1)
     {
         time = 0.0;
@@ -43,7 +46,6 @@ void play_sine()
 
 void play_sawtooth()
 {
-    time += 0.00002264285;
     if (time > 1)
     {
         time = 0.0;
@@ -58,7 +60,7 @@ void play_sawtooth()
 
 void change_volume(int delta_volume)
 {
-    if((amplitude - delta_volume) < 0)
+    if((abs(delta_volume) > amplitude) && (delta_volume < 0))
     {
         amplitude = 0;
     }
@@ -71,7 +73,7 @@ void change_volume(int delta_volume)
 
 void change_frequency(int delta_freq)
 {
-    if ((frequency - delta_freq) < 1)
+    if ((abs(delta_freq) > frequency) && delta_freq < 0)
     {
         frequency = 1;
     }
@@ -84,7 +86,6 @@ void change_frequency(int delta_freq)
 
 void play_square()
 {
-    time += 0.00002264285;
     if (time > 1)
     {
         time = 0.0;
