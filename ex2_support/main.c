@@ -8,6 +8,7 @@
 #include "gpio.h"
 #include "timer.h"
 #include "dac.h"
+#include "interrupt_handler.h"
 
 
 /*
