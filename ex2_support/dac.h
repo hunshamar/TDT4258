@@ -6,6 +6,6 @@
 
 #include "efm32gg.h"
 
-void setupDAC();
+void DAC_init();
 
 #endif

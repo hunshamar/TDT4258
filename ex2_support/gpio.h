@@ -8,15 +8,16 @@
 #include "efm32gg.h"
 
 
-void setupGPIO();
+void GPIO_init();
 
-void illuminate_LED(uint8_t pin);
+void GPIO_illuminate_LED(uint8_t pin);
 
-void dilluminate_LED(uint8_t pin);
+void GPIO_delluminate_LED(uint8_t pin);
 
-bool button_pressed(uint8_t button_number);
+bool GPIO_button_pressed(uint8_t button_number);
 
-void clear_interrupt();
+void GPIO_toggle_LED(uint8_t led_number);
+
 
 int button_poll();
 
