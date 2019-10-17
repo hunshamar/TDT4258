@@ -10,5 +10,6 @@
 
 void interrupt_init();
 void interrupt_clear();
+void interrupt_handler();
 
 #endif
