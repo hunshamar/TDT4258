@@ -53,17 +53,17 @@ void play_triangle()
     }
     if (triangle_rise)
     {
-        triangle_val += (int)round(amplitude * 0.00002264285 * ((double)frequency/2));
+        triangle_val += (int)round(amplitude * 0.00002264285 * ((double)frequency*2));
     }
     else
     {
-        if (triangle_val < (int)round(amplitude * 0.00002264285 * ((double)frequency/2)))
+        if (triangle_val < (int)round(amplitude * 0.00002264285 * ((double)frequency*2)))
         {
             triangle_rise = true;
         }
         else
         {
-            triangle_val -= (int)round(amplitude * 0.00002264285 * ((double)frequency/2));
+            triangle_val -= (int)round(amplitude * 0.00002264285 * ((double)frequency*2));
         }
         
     }
