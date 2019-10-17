@@ -42,6 +42,11 @@ void play_sound()
 
 void play_triangle()
 {
+    if(time > 1)
+    {
+        time = 0;
+        sound_type = 0;
+    }
     if(triangle_val > amplitude)
     {
         triangle_rise = false;
@@ -62,6 +67,8 @@ void play_triangle()
         }
         
     }
+    *DAC0_CH0DATA = triangle_val;
+    *DAC0_CH1DATA = triangle_val;
 }
 
 void play_sawtooth()
@@ -108,6 +115,11 @@ void change_frequency(int delta_freq)
 
 void play_square()
 {
+    if(time > 1)
+    {
+        time = 0.0;
+        sound_type = 0;
+    }
     double period = round((41000/(double)frequency));
     square_count += 1;
     if (square_count > period)
