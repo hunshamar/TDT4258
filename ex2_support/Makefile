@@ -14,7 +14,7 @@ LINKERSCRIPT=lib/efm32gg.ld
 main.bin : main.elf
 	${OBJCOPY} -O binary $< $@
 
-main.elf : main.o timer.o dac.o gpio.o interrupt_handlers.o
+main.elf : main.o timer.o dac.o gpio.o interrupt_handlers.o sound.o
 	${LD} -T ${LINKERSCRIPT} $^ -o $@ ${LDFLAGS} 
 
 %.o : %.c
