@@ -3,8 +3,8 @@
 #include "efm32gg.h"
 #include "math.h"
 
-#define AMPLITUDE 2000 
 
+uint16_t amplitude = 500;
 uint8_t sound_type = 0;
 double time = 0.0;
 uint16_t sawtooth_val = 0;
@@ -24,7 +24,7 @@ void play_sound()
         case 2:
             play_sawtooth();
         case 3:
-            play_square()
+            play_square();
     }
 }
 
@@ -36,7 +36,7 @@ void play_sine()
         time = 0.0;
         sound_type = 0;
     }
-    uint16_t val = 1000 + round(sin(2*3.14*time));
+    uint16_t val = amplitude + round(amplitude * sin(2*3.14*time));
     *DAC0_CH0DATA = val;
     *DAC0_CH1DATA = val;
 }
@@ -49,12 +49,38 @@ void play_sawtooth()
         time = 0.0;
         sound_type = 0;
     }
-    if (sawtooth_val > AMPLITUDE)
+    if (sawtooth_val > amplitude)
     {
         sawtooth_val = 0;
     }
-    sawtooth_val += (int)(round((double)AMPLITUDE*0.00002264285*(double)frequency));
+    sawtooth_val += (int)(round((double)amplitude*0.00002264285*(double)frequency));
 }
+
+void change_volume(int delta_volume)
+{
+    if((amplitude - delta_volume) < 0)
+    {
+        amplitude = 0;
+    }
+    else
+    {
+        amplitude += delta_volume;
+    }
+    
+}
+
+void change_frequency(int delta_freq)
+{
+    if ((frequency - delta_freq) < 1)
+    {
+        frequency = 1;
+    }
+    else
+    {
+        frequency += delta_freq;
+    }
+    
+} 
 
 void play_square()
 {
@@ -66,18 +92,13 @@ void play_square()
     }
     else
     {
-        *DAC0_CH0DATA = AMPLITUDE;
-        *DAC0_CH1DATA = AMPLITUDE;
+        *DAC0_CH0DATA = amplitude;
+        *DAC0_CH1DATA = amplitude;
     }
 }
 
 void set_sound_type(uint8_t sound)
 {
     sound_type = sound;
-    time = 0.0;
 }
 
-void set_frequency(uint16_t freq)
-{
-    frequency = freq;
-}

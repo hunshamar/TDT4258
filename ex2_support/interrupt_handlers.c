@@ -1,46 +1,61 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
-
+#include "gpio.h"
+#include "sound.h"
 #include "efm32gg.h"
 
 uint16_t sound_0 = 0;
 uint16_t sound_1 = 0;
 double time = 0.0;
-double period_c_note = 0.0038222;
 
-/*
- * TIMER1 interrupt handler 
- */
+
 void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 {
 	*TIMER1_IFC = 1;
-	time += 0.000022643;//timer period in seconds
-	*DAC0_CH0CTRL = 500 + (int)round(500 * sin(time*2*3.14/period_c_note));
-	*DAC0_CH1CTRL = 500 + (int)round(500 * sin(time*2*3.14/period_c_note));
-
-
-	/*
-	 * TODO feed new samples to the DAC remember to clear the pending
-	 * interrupt by writing 1 to TIMER1_IFC 
-	 */
+	play_sound();
 }
 
-/*
- * GPIO even pin interrupt handler 
- */
+
 void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
 {
+	if (button_pressed(0))
+	{
+		set_sound_type(0);
+	}
+	else if (button_pressed(2))
+	{
+		set_sound_type(2);
+	}
+	else if (button_pressed(6))
+	{
+		change_volume(50);
+	}
+	else if (button_pressed(8))
+	{
+		change_volume(-50);
+	}
+}
+
+
+void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
+{
+	if (button_pressed(1))
+	{
+		set_sound_type(1);
+	}
+	else if (button_pressed(3))
+	{
+		set_sound_type(3);
+	}
+	else if (button_pressed(5))
+	{
+		change_frequency(-10);
+	}
+	else if (button_pressed(7))
+	{
+		change_frequency(10);
+	}
 	
 }
 
-/*
- * GPIO odd pin interrupt handler 
- */
-void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
-{
-	/*
-	 * TODO handle button pressed event, remember to clear pending
-	 * interrupt 
-	 */
-}
