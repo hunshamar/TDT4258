@@ -6,13 +6,17 @@
 
 #define PI 3.14159265
 
-uint16_t amplitude = 100;
+int amplitude = 100;
 uint8_t sound_type = 0;
 double time = 0.0;
-uint16_t sawtooth_val = 0;
-uint16_t frequency = 250;
+int sawtooth_val = 0;
+int frequency = 250;
 bool square_high = false;
-double time_since_shift = 0;
+int square_count = 0;
+uint16_t triangle_val = 0;
+bool triangle_rise = true;
+
+
 
 void play_sound()
 {
@@ -25,7 +29,7 @@ void play_sound()
             time = 0.0;
             break;
         case 1:
-            play_sine();
+            play_triangle();
             break;
         case 2:
             play_sawtooth();
@@ -36,17 +40,28 @@ void play_sound()
     }
 }
 
-void play_sine()
+void play_triangle()
 {
-    double period = 1/(double)frequency;
-    if (time > 1)
+    if(triangle_val > amplitude)
     {
-        time = 0.0;
-        sound_type = 0;
+        triangle_rise = false;
     }
-    uint16_t val = amplitude + amplitude*sinf(2*PI*time/period);
-    *DAC0_CH0DATA = val;
-    *DAC0_CH1DATA = val;
+    if (triangle_rise)
+    {
+        triangle_val += (int)round(amplitude * 0.00002264285 * ((double)frequency/2));
+    }
+    else
+    {
+        if (triangle_val < (int)round(amplitude * 0.00002264285 * ((double)frequency/2)))
+        {
+            triangle_rise = true;
+        }
+        else
+        {
+            triangle_val -= (int)round(amplitude * 0.00002264285 * ((double)frequency/2));
+        }
+        
+    }
 }
 
 void play_sawtooth()
@@ -93,34 +108,26 @@ void change_frequency(int delta_freq)
 
 void play_square()
 {
-    double period = 1/frequency;
-    if (time > 1)
+    double period = round((41000/(double)frequency));
+    square_count += 1;
+    if (square_count > period)
     {
-        time = 0.0;
-        sound_type = 0;
-    }
-    if(time_since_shift > period)
-    {
+        square_count = 0;
         if(square_high)
         {
             square_high = false;
+            *DAC0_CH0DATA = 0;
+            *DAC0_CH1DATA = 0;
         }
         else
         {
             square_high = true;
+            *DAC0_CH0DATA = amplitude;
+            *DAC0_CH1DATA = amplitude;
         }
         
     }
-    if (square_high)
-    {
-        *DAC0_CH0DATA = amplitude;
-        *DAC0_CH1DATA = amplitude;
-    }
-    else
-    {
-        *DAC0_CH0DATA = 0;
-        *DAC0_CH1DATA = 0;
-    }
+
 }
 
 void set_sound_type(uint8_t sound)
