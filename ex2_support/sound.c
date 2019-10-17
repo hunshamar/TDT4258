@@ -36,7 +36,7 @@ void play_sine()
         time = 0.0;
         sound_type = 0;
     }
-    uint16_t val = amplitude + round(amplitude * sin(2*3.14*time));
+    uint16_t val = amplitude + round(amplitude * sin(2*3.14*time/(1/frequency)));
     *DAC0_CH0DATA = val;
     *DAC0_CH1DATA = val;
 }
@@ -101,4 +101,3 @@ void set_sound_type(uint8_t sound)
 {
     sound_type = sound;
 }
-
