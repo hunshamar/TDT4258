@@ -56,6 +56,8 @@ void play_sawtooth()
         sawtooth_val = 0;
     }
     sawtooth_val += (int)(round((double)amplitude*0.00002264285*(double)frequency));
+    *DAC0_CH0DATA = sawtooth_val;
+    *DAC0_CH1DATA = sawtooth_val;
 }
 
 void change_volume(int delta_volume)
