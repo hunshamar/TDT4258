@@ -7,7 +7,6 @@
 
 uint16_t sound_0 = 0;
 uint16_t sound_1 = 0;
-double time = 0.0;
 
 
 void __attribute__ ((interrupt)) TIMER1_IRQHandler()
