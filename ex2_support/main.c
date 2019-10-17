@@ -8,6 +8,7 @@
 #include "gpio.h"
 #include "timer.h"
 #include "dac.h"
+#include "sound.h"
 
 
 /*
@@ -38,49 +39,50 @@ int main(void)
 	setupNVIC();
 	setupDAC();
 	setupTimer(SAMPLE_PERIOD);
-	setSleep(0b110);
-	/*
-	 * TODO for higher energy efficiency, sleep while waiting for
-	 * interrupts instead of infinite loop for busy-waiting 
-	 */
-
-
+	//setSleep(0b110);
+	
+	while(true)
+	{
+		if(busy_wait())
+		{
+			int button_pressed = button_poll();
+			switch(button_pressed)
+			{
+				case 0:
+					set_sound_type(0);
+					break;
+				case 1:
+					set_sound_type(1);
+					break;
+				case 2:
+					set_sound_type(2);
+					break;
+				case 3:
+					set_sound_type(3);
+				case 4:
+					change_frequency(-20);
+				case 5:
+					change_volume(20);
+				case 6:
+					change_frequency(20);
+				case 7:
+					change_volume(-20);
+					break;
+				default:
+					break;
+			}
+			play_sound();
+		}
+	}
 	return 0;
 }
 
 void setupNVIC()
 {
 	*ISER0 = 0x1802;	
-	/*
-	 * TODO use the NVIC ISERx registers to enable handling of
-	 * interrupt(s) remember two things are necessary for interrupt
-	 * handling: - the peripheral must generate an interrupt signal - the
-	 * NVIC must be configured to make the CPU handle the signal You will
-	 * need TIMER1, GPIO odd and GPIO even interrupt handling for this
-	 * assignment. 
-	 */
 }
 
 void setSleep(int arg)
 {
 	*SCR = arg;
 }
-
-/*
- * if other interrupt handlers are needed, use the following names:
- * NMI_Handler HardFault_Handler MemManage_Handler BusFault_Handler
- * UsageFault_Handler Reserved7_Handler Reserved8_Handler
- * Reserved9_Handler Reserved10_Handler SVC_Handler DebugMon_Handler
- * Reserved13_Handler PendSV_Handler SysTick_Handler DMA_IRQHandler
- * GPIO_EVEN_IRQHandler TIMER0_IRQHandler USART0_RX_IRQHandler
- * USART0_TX_IRQHandler USB_IRQHandler ACMP0_IRQHandler ADC0_IRQHandler
- * DAC0_IRQHandler I2C0_IRQHandler I2C1_IRQHandler GPIO_ODD_IRQHandler
- * TIMER1_IRQHandler TIMER2_IRQHandler TIMER3_IRQHandler
- * USART1_RX_IRQHandler USART1_TX_IRQHandler LESENSE_IRQHandler
- * USART2_RX_IRQHandler USART2_TX_IRQHandler UART0_RX_IRQHandler
- * UART0_TX_IRQHandler UART1_RX_IRQHandler UART1_TX_IRQHandler
- * LEUART0_IRQHandler LEUART1_IRQHandler LETIMER0_IRQHandler
- * PCNT0_IRQHandler PCNT1_IRQHandler PCNT2_IRQHandler RTC_IRQHandler
- * BURTC_IRQHandler CMU_IRQHandler VCMP_IRQHandler LCD_IRQHandler
- * MSC_IRQHandler AES_IRQHandler EBI_IRQHandler EMU_IRQHandler 
- */

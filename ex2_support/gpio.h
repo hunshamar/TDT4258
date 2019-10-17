@@ -18,4 +18,6 @@ bool button_pressed(uint8_t button_number);
 
 void clear_interrupt();
 
+int button_poll();
+
 #endif

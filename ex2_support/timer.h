@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 #include "efm32gg.h"
-
+bool busy_wait();
 void setupTimer(uint16_t period);
 
 #endif

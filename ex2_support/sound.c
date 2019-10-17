@@ -147,3 +147,8 @@ void set_sound_type(uint8_t sound)
     time = 0.0;
     sound_type = sound;
 }
+
+void startup_tune()
+{
+    
+}

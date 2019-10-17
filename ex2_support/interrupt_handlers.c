@@ -36,19 +36,19 @@ void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
 	}
 	else if (button_pressed(4))
 	{
-		change_frequency(-10);
+		change_frequency(-20);
 	}
 	else if (button_pressed(5))
 	{
-		change_volume(50);
+		change_volume(20);
 	}
 	else if (button_pressed(6))
 	{
-		change_frequency(10);
+		change_frequency(20);
 	}
 	else if (button_pressed(7))
 	{
-		change_volume(-50);
+		change_volume(-20);
 	}
 	clear_interrupt();
 }
@@ -74,19 +74,19 @@ void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
 	}
 	else if (button_pressed(4))
 	{
-		change_frequency(-10);
+		change_frequency(-20);
 	}
 	else if (button_pressed(5))
 	{
-		change_volume(50);
+		change_volume(20);
 	}
 	else if (button_pressed(6))
 	{
-		change_frequency(10);
+		change_frequency(20);
 	}
 	else if (button_pressed(7))
 	{
-		change_volume(-50);
+		change_volume(-20);
 	}
 	clear_interrupt();
 }

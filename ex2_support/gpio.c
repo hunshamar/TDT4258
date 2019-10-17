@@ -44,3 +44,15 @@ bool button_pressed(uint8_t button_number){
 void clear_interrupt() { 
 	*GPIO_IFC = *GPIO_IF;
 }
+
+int button_poll()
+{
+	for (int i = 0; i < 8; ++i)
+	{
+		if(button_pressed(i))
+		{
+			return i;
+		}
+	}
+	return 0;
+}
