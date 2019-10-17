@@ -37,14 +37,14 @@ int main(void)
 	 */
 	setupGPIO();
 
-	while(1){
-		for(int i = 0; i < 8; i++){
-			if(button_pressed(i)){
-				toggle_LED(i);
-			}
-		}
-	}
-	
+	// while(1){
+	// 	for(int i = 0; i < 8; i++){
+	// 		if(button_pressed(i)){
+	// 			toggle_LED(i);
+	// 		}
+	// 	}
+	// }
+
 	setupNVIC();
 	setupDAC();
 	setupTimer(SAMPLE_PERIOD);
