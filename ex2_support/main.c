@@ -44,6 +44,14 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 
+	while(1){
+		for(int i = 0; i < 8; i++){
+			if(button_pressed(i)){
+				toggle_LED(i);
+			}
+		}
+	}
+
 
 	return 0;
 }
