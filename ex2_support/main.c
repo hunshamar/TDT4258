@@ -25,7 +25,7 @@
 /*
  * Declaration of peripheral setup functions 
  */
-void setupNVIC();
+void NVIC_init();
 
 /*
  * Your code will start executing here 
@@ -35,7 +35,7 @@ int main(void)
 	/*
 	 * Call the peripheral setup functions 
 	 */
-	setupGPIO();
+	GPIO_init();
 
 	// while(1){
 	// 	for(int i = 0; i < 8; i++){
