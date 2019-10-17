@@ -38,7 +38,12 @@ void dilluminate_LED(uint8_t led_number){
 bool button_pressed(uint8_t button_number){
 
 	return ~(*GPIO_PC_DIN) & 1 << button_number; // +1 because button 0 is called button 1
+}
 
+
+
+void toggle_LED(uint8_t led_number){
+	*GPIO_PA_DOUT ^= (1 << led_number) << 8;
 }
 
 void clear_interrupt() { 
