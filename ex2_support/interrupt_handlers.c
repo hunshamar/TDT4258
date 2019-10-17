@@ -20,7 +20,7 @@ void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
 {
 	if (button_pressed(0))
 	{
-		
+
 		set_sound_type(0);
 	}
 	else if (button_pressed(2))
@@ -35,6 +35,7 @@ void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
 	{
 		change_volume(-50);
 	}
+	clear_interrupt();
 }
 
 
@@ -56,6 +57,7 @@ void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
 	{
 		change_frequency(10);
 	}
+	clear_interrupt();
 	
 }
 

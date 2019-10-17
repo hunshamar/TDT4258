@@ -42,5 +42,5 @@ bool button_pressed(uint8_t button_number){
 }
 
 void clear_interrupt() { 
-    
+	*GPIO_IFC = *GPIO_IF;
 }

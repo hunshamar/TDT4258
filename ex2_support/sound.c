@@ -4,7 +4,7 @@
 #include "math.h"
 
 
-uint16_t amplitude = 500;
+uint16_t amplitude = 100;
 uint8_t sound_type = 0;
 double time = 0.0;
 uint16_t sawtooth_val = 0;
