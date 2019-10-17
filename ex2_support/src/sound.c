@@ -12,9 +12,9 @@ uint16_t frequency = 200;
 
 void play_sound()
 {
+    time += 0.00002264285;
     switch(sound_type)
     {
-        time += 0.00002264285;
         case 0:
             *DAC0_CH0DATA = 0;
             *DAC0_CH1DATA = 0;
@@ -93,7 +93,7 @@ void play_square()
         time = 0.0;
         sound_type = 0;
     }
-    if(fmod(time, 1/frequency) > 1/(2*frequency))
+    if (fmod(time, 1/frequency) > 1/(2*frequency))
     {
         *DAC0_CH0DATA = 0;
         *DAC0_CH1DATA = 0;
