@@ -16,4 +16,6 @@ void dilluminate_LED(uint8_t pin);
 
 bool button_pressed(uint8_t button_number);
 
+void clear_interrupt();
+
 #endif
