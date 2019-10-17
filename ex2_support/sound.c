@@ -2,17 +2,13 @@
 #include "sound.h"
 #include "efm32gg.h"
 #include "math.h"
-#include <stdbool.h>
-#define PI 3.14159
 
 
 uint16_t amplitude = 100;
 uint8_t sound_type = 0;
 double time = 0.0;
-uint16_t sawtooth_val;
+uint16_t sawtooth_val = 0;
 uint16_t frequency = 200;
-double time_since_shift = 0;
-bool square_up = false;
 
 void play_sound()
 {
@@ -43,7 +39,7 @@ void play_sine()
         time = 0.0;
         sound_type = 0;
     }
-    int val = amplitude + (int)round(amplitude * cos(time * 2 * PI * (double)((double)1/(double)frequency)));
+    uint16_t val = amplitude + (int)round(amplitude * sin(2*3.14*time/(1/frequency)));
     *DAC0_CH0DATA = val;
     *DAC0_CH1DATA = val;
 }
@@ -69,9 +65,6 @@ void change_volume(int delta_volume)
     if((abs(delta_volume) > amplitude) && (delta_volume < 0))
     {
         amplitude = 0;
-    }
-    else if(amplitude > 1500)
-    {
     }
     else
     {
@@ -100,13 +93,12 @@ void play_square()
         time = 0.0;
         sound_type = 0;
     }
-    time_since_shift += 0.00002264285;
-    if (time_since_shift > (double)(1/frequency))
+    if (fmod(time, 1/frequency) > 1/(2*frequency))
     {
-        time_since_shift = 0;
-        square_up = !square_up;
+        *DAC0_CH0DATA = 0;
+        *DAC0_CH1DATA = 0;
     }
-    if (square_up)
+    else
     {
         *DAC0_CH0DATA = amplitude;
         *DAC0_CH1DATA = amplitude;
