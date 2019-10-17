@@ -17,7 +17,7 @@
  * registers are 16 bits. 
  */
 /*
- * The period between sound samples, in clock cycles 
+ * The period between sound samples, in clock cycles (CPU runs at 14Mhz)
  */
 #define   SAMPLE_PERIOD   317
 
@@ -35,52 +35,15 @@ int main(void)
 	 * Call the peripheral setup functions 
 	 */
 	setupGPIO();
+	setupNVIC();
 	setupDAC();
 	setupTimer(SAMPLE_PERIOD);
-
-	/*
-	 * Enable interrupt handling 
-	 */
-	setupNVIC();
 	setSleep(0b110);
-
 	/*
 	 * TODO for higher energy efficiency, sleep while waiting for
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 
-
-	// while (1){
-		
-	// 	// sound1 += 2;
-	// 	// int sound2 = sound1;
-
-	// 	// if (sound1 >= 1000){
-	// 	// 	sound1 = 0;
-	// 	// }
-
-	// 	// //_delay_ms(10);
-
-	// 	// *DAC0_CH0DATA = sound1;
-	// 	// *DAC0_CH1DATA = sound2;
-
-
-	// 	if (button_pressed(1)){
-	// 		illuminate_LED(0);
-	// 	}
-	// 	if (button_pressed(2)){
-	// 		illuminate_LED(1);
-	// 	}
-	// 	if (button_pressed(3)){
-	// 		illuminate_LED(2);
-	// 	}
-	// 	if (button_pressed(4)){
-	// 		illuminate_LED(3);
-	// 	}
-
-
-
-	// }
 
 	return 0;
 }
