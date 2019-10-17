@@ -1,3 +1,6 @@
+#ifndef GPIO_H
+#define GPIO_H
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -12,3 +15,5 @@ void illuminate_LED(uint8_t pin);
 void dilluminate_LED(uint8_t pin);
 
 bool button_pressed(uint8_t button_number);
+
+#endif
