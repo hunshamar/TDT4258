@@ -10,7 +10,7 @@ uint16_t amplitude = 100;
 uint8_t sound_type = 0;
 double time = 0.0;
 uint16_t sawtooth_val = 0;
-uint16_t frequency = 200;
+uint16_t frequency = 250;
 bool square_high = false;
 double time_since_shift = 0;
 
@@ -38,12 +38,13 @@ void play_sound()
 
 void play_sine()
 {
+    double period = 1/(double)frequency;
     if (time > 1)
     {
         time = 0.0;
         sound_type = 0;
     }
-    uint16_t val = amplitude + (int)(round(amplitude * cos((2 * PI * time)/(double)((double)1/(double)frequency))));
+    uint16_t val = amplitude + amplitude*sinf(2*PI*time/period);
     *DAC0_CH0DATA = val;
     *DAC0_CH1DATA = val;
 }
@@ -59,7 +60,7 @@ void play_sawtooth()
     {
         sawtooth_val = 0;
     }
-    sawtooth_val += (int)(round((double)amplitude*0.00002264285*(double)frequency));
+    sawtooth_val += (int)(round((double)amplitude * 0.00002264285 * (double)frequency));
     *DAC0_CH0DATA = sawtooth_val;
     *DAC0_CH1DATA = sawtooth_val;
 }
@@ -92,24 +93,33 @@ void change_frequency(int delta_freq)
 
 void play_square()
 {
+    double period = 1/frequency;
     if (time > 1)
     {
         time = 0.0;
         sound_type = 0;
     }
-    if(time_since_shift > (double)((double)1/((double)2 * (double)frequency)))
+    if(time_since_shift > period)
     {
-        square_high = !square_high;
+        if(square_high)
+        {
+            square_high = false;
+        }
+        else
+        {
+            square_high = true;
+        }
+        
     }
-    if (!square_high)
-    {
-        *DAC0_CH0DATA = 0;
-        *DAC0_CH1DATA = 0;
-    }
-    else
+    if (square_high)
     {
         *DAC0_CH0DATA = amplitude;
         *DAC0_CH1DATA = amplitude;
+    }
+    else
+    {
+        *DAC0_CH0DATA = 0;
+        *DAC0_CH1DATA = 0;
     }
 }
 
