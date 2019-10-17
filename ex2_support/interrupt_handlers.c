@@ -8,6 +8,12 @@
 uint16_t sound_0 = 0;
 uint16_t sound_1 = 0;
 
+void setup_interrupt(){
+	*GPIO_EXTIPSELL = 0x22222222; // enables interupt generation on pins 0-7(the buttons)
+	*GPIO_EXTIFALL = 0xFF;	// enables interrupt generation on the 1->0 transition, when the button is pressed down
+	*GPIO_IEN = 0xFF; 	// enable interrupt generation from the specific GPIO-register
+}
+}
 
 void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 {

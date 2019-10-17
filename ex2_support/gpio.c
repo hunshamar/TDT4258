@@ -22,9 +22,6 @@ void setupGPIO()
 	*GPIO_PA_CTRL = 2;	/* set high drive strength */
 	*GPIO_PA_MODEH = 0x55555555;	/* set pins A8-15 as output */
 	*GPIO_PA_DOUT = 0xFF00;	/* turn on LEDs D4-D8 (LEDs are active low) */
-	*GPIO_EXTIPSELL = 0x22222222; // enables interupt generation on pins 0-7(the buttons)
-	*GPIO_EXTIFALL = 0xFF;	// enables interrupt generation on the 1->0 transition, when the button is pressed down
-	*GPIO_IEN = 0xFF; 	// enable interrupt generation from the specific GPIO-register
 }
 
 void illuminate_LED(uint8_t led_number){

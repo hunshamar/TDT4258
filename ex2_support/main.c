@@ -48,6 +48,7 @@ int main(void)
 	setupNVIC();
 	setupDAC();
 	setupTimer(SAMPLE_PERIOD);
+	setupInterrupt();
 	setSleep(0b110);
 	/*
 	 * TODO for higher energy efficiency, sleep while waiting for

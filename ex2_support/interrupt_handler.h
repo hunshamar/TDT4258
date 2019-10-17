@@ -8,6 +8,7 @@
 #include "efm32gg.h"
 
 
+void setupInterrupt();
 void clear_interrupt();
 
 #endif
