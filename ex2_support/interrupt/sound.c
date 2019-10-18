@@ -15,28 +15,38 @@ bool square_high = false;
 int square_count = 0;
 uint16_t triangle_val = 0;
 bool triangle_rise = true;
-
+bool done_playing_startup = false;
+uint8_t startup = 1;
+int startup_timer = 0;
 
 
 void play_sound()
 {
+    if(done_playing_startup)
+    {
     time += 0.00002264285;
     switch(sound_type)
+        {
+            case 0:
+                *DAC0_CH0DATA = 0;
+                *DAC0_CH1DATA = 0;
+                time = 0.0;
+                break;
+            case 1:
+                play_triangle();
+                break;
+            case 2:
+                play_sawtooth();
+                break;
+            case 3:
+                play_square();
+                break;
+        }
+    }
+    else
     {
-        case 0:
-            *DAC0_CH0DATA = 0;
-            *DAC0_CH1DATA = 0;
-            time = 0.0;
-            break;
-        case 1:
-            play_triangle();
-            break;
-        case 2:
-            play_sawtooth();
-            break;
-        case 3:
-            play_square();
-            break;
+        sound_type = 1;
+        startup_tune();
     }
 }
 
@@ -147,3 +157,33 @@ void set_sound_type(uint8_t sound)
     time = 0.0;
     sound_type = sound;
 }
+
+void startup_tune()
+{
+    if(startup == 1)
+    {
+        frequency = 522;
+    }
+    else if(startup == 2)
+    {
+        frequency = 660;
+    }
+    else if(startup == 2)
+    {
+        frequency = 784;
+    }
+    play_triangle();
+    if(startup_timer > 15000)
+    {
+        startup++;
+        startup_timer = 0;
+    }
+    if(startup == 4)
+    {
+        done_playing_startup = true;
+        sound_type = 0;
+    }
+    startup_timer++;
+
+}
+

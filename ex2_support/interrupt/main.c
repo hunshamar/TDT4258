@@ -8,6 +8,7 @@
 #include "gpio.h"
 #include "timer.h"
 #include "dac.h"
+#include "sound.h"
 #include "interrupt_handler.h"
 
 
@@ -49,6 +50,7 @@ int main(void)
 	DAC_init();
 	timer_init(SAMPLE_PERIOD);
 	interrupt_init();
+	startup_tune();
 	set_sleep(0b110);
 	/*
 	 * TODO for higher energy efficiency, sleep while waiting for
