@@ -81,6 +81,9 @@ int main(void)
 				change_volume(-20);
 				break;
 			default:
+				for (int i = 0; i < 8; i++){
+					GPIO_delluminate_LED(i);
+				}
 				break;
 		}
 		play_sound();
