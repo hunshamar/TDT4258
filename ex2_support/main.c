@@ -45,18 +45,20 @@ int main(void)
 	startup_tune();
 	//setSleep(0b110);
 	
-	
-	GPIO_illuminate_LED(3);
-
-	GPIO_illuminate_LED(7);
+	for (int i = 0; i < 8; i++){
+		GPIO_delluminate_LED(i);
+	}
 
 	while(true)
 	{
+		
+
 		busy_wait();
 		int button_pressed = button_poll();
 		if (button_pressed != -1){
 			GPIO_illuminate_LED(button_pressed);
 		}
+
 		switch(button_pressed)
 		{
 			case 0:
