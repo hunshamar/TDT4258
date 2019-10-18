@@ -23,5 +23,4 @@ bool busy_wait()
 	{
 		return busy_wait();
 	}
-	
 }
