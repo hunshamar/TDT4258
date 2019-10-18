@@ -29,6 +29,8 @@ int main(void)
 	}
 
 
+	GPIO_illuminate_LED(2);
+
 	GPIO_init();
 	//NVIC_init();
 	DAC_init();
