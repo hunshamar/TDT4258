@@ -34,10 +34,12 @@ int main(void)
 	{
 		busy_wait();
 		int button_pressed = button_poll();
+		GPIO_illuminate_LED(button_pressed);
 		switch(button_pressed)
 		{
 			case 0:
 				set_sound_type(0);
+				GPIO_illuminate_LED(0);
 				break;
 			case 1:
 				set_sound_type(1);
