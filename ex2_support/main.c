@@ -33,7 +33,9 @@ int main(void)
 
 	GPIO_illuminate_LED(1);
 
-	busy_wait();
+	for(int i = 0; i < 100; i++){
+		busy_wait();
+	}	
 	
 	
 	GPIO_illuminate_LED(2);
