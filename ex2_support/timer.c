@@ -12,15 +12,8 @@ void setupTimer(uint16_t period)
 	*TIMER1_CMD = 1;	
 }
 
-
-bool busy_wait()
+//waits for one period
+void busy_wait()
 {
-	if (*TIMER1_CNT == *TIMER1_TOP)
-	{
-		return true;
-	}
-	else
-	{
-		return busy_wait();
-	}
+	while (*TIMER1_CNT != *TIMER1_TOP){}
 }

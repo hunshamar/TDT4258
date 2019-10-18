@@ -10,26 +10,21 @@
 #include "dac.h"
 #include "sound.h"
 #include "interrupt_handler.h"
-/*
- * The period between sound samples, in clock cycles (CPU runs at 14Mhz)
- */
+
+
 #define   SAMPLE_PERIOD   317
 
-/*
- * Declaration of peripheral setup functions 
- */
-void NVIC_init();
 
-/*
- * Your code will start executing here 
- */
+//void NVIC_init();
+
+
 int main(void)
 {
 	/*
 	 * Call the peripheral setup functions 
 	 */
 	GPIO_init();
-	NVIC_init();
+	//NVIC_init();
 	DAC_init();
 	setupTimer(SAMPLE_PERIOD);
 	startup_tune();
@@ -37,36 +32,35 @@ int main(void)
 	
 	while(true)
 	{
-		if(busy_wait())
+		busy_wait();
+		int button_pressed = button_poll();
+		switch(button_pressed)
 		{
-			int button_pressed = button_poll();
-			switch(button_pressed)
-			{
-				case 0:
-					set_sound_type(0);
-					break;
-				case 1:
-					set_sound_type(1);
-					break;
-				case 2:
-					set_sound_type(2);
-					break;
-				case 3:
-					set_sound_type(3);
-				case 4:
-					change_frequency(-20);
-				case 5:
-					change_volume(20);
-				case 6:
-					change_frequency(20);
-				case 7:
-					change_volume(-20);
-					break;
-				default:
-					break;
-			}
-			play_sound();
+			case 0:
+				set_sound_type(0);
+				break;
+			case 1:
+				set_sound_type(1);
+				break;
+			case 2:
+				set_sound_type(2);
+				break;
+			case 3:
+				set_sound_type(3);
+			case 4:
+				change_frequency(-20);
+			case 5:
+				change_volume(20);
+			case 6:
+				change_frequency(20);
+			case 7:
+				change_volume(-20);
+				break;
+			default:
+				break;
 		}
+		play_sound();
+
 	}
 	return 0;
 }
