@@ -58,7 +58,7 @@ void interrupt_handler(){
 
 void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 {
-	clear_interrupt();
+	interrupt_clear();
 	*TIMER1_IFC = 1;
 	play_sound();
 }

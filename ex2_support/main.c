@@ -28,9 +28,9 @@ int main(void)
 	/*
 	 * Call the peripheral setup functions 
 	 */
-	setupGPIO();
-	setupNVIC();
-	setupDAC();
+	GPIO_init();
+	NVIC_init();
+	DAC_init();
 	setupTimer(SAMPLE_PERIOD);
 	startup_tune();
 	//setSleep(0b110);
