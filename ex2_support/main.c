@@ -25,17 +25,19 @@ int main(void)
 	 */
 
 	GPIO_init();
+	setupTimer(SAMPLE_PERIOD);
 
 	for (int i = 0; i < 8; i++){
 		GPIO_delluminate_LED(i);
 	}
 
-
+	busy_wait();
+	
+	
 	GPIO_illuminate_LED(2);
 
 	//NVIC_init();
 	DAC_init();
-	setupTimer(SAMPLE_PERIOD);
 	startup_tune();
 	//setSleep(0b110);
 	
