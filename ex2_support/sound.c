@@ -155,22 +155,29 @@ void startup_tune()
     frequency = 261;//C
     for (int i = 0; i < 15000; ++i)
     {
-        play_sound();
-        while(!busy_wait()){}
+        if(busy_wait())
+        {
+            play_sound();
+        }
     }
     set_sound_type(1);
     frequency = 330;//E
     for (int i = 0; i < 15000; ++i)
     {
-        play_sound();
-        while(!busy_wait()){}
+        if(busy_wait())
+        {
+            play_sound();
+        }
     }
     set_sound_type(1);
     frequency = 392;//G
     for (int i = 0; i < 15000; ++i)
     {
-        play_sound();
-        while(!busy_wait()){}
+        if(busy_wait())
+        {
+            play_sound();
+        }
     }
     set_sound_type(0);
+    frequency = 250;
 }
