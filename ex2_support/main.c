@@ -30,6 +30,10 @@ int main(void)
 	startup_tune();
 	//setSleep(0b110);
 	
+	for (int i = 0; i < 8; i++){
+		GPIO_delluminate_LED(i);
+	}
+
 	while(true)
 	{
 		busy_wait();

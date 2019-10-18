@@ -27,7 +27,7 @@ void GPIO_illuminate_LED(uint8_t led_number){
 	*GPIO_PA_DOUT &= ~( (1 << led_number) << 8 );
 }
 
-void GPIO_deluminate_LED(uint8_t led_number){
+void GPIO_delluminate_LED(uint8_t led_number){
 	*GPIO_PA_DOUT |= (1 << led_number ) << 8;
 }
 
