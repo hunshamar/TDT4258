@@ -7,11 +7,11 @@
 #include "gpio.h"
 
 
-static int amplitude = 100;
+static int amplitude = 200;
 static uint8_t sound_type = 0;
 static double time = 0.0;
 static int sawtooth_val = 0;
-static int frequency = 250;
+static int frequency = 500;
 static bool square_high = false;
 static int square_count = 0;
 static uint16_t triangle_val = 0;
@@ -153,7 +153,7 @@ void startup_tune()
 {
     GPIO_illuminate_LED(4);
     set_sound_type(1);
-    frequency = 261;//C
+    frequency = 522;//C
     for (int i = 0; i < 15000; ++i)
     {
         busy_wait();
@@ -161,14 +161,14 @@ void startup_tune()
     }
     GPIO_illuminate_LED(5);
     set_sound_type(1);
-    frequency = 330;//E
+    frequency = 660;//E
     for (int i = 0; i < 15000; ++i)
     {
         busy_wait();
         play_sound();
     }
     set_sound_type(1);
-    frequency = 392;//G
+    frequency = 784;//G
     GPIO_illuminate_LED(6);
     for (int i = 0; i < 15000; ++i)
     {
@@ -176,5 +176,5 @@ void startup_tune()
         play_sound();
     }
     set_sound_type(0);
-    frequency = 250;
+    frequency = 500;
 }
