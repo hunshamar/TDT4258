@@ -72,12 +72,16 @@ int main(void)
 				break;
 			case 3:
 				set_sound_type(3);
+				break;
 			case 4:
 				change_frequency(-20);
+				break;
 			case 5:
 				change_volume(20);
+				break;
 			case 6:
 				change_frequency(20);
+				break;
 			case 7:
 				change_volume(-20);
 				break;
