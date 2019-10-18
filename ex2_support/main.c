@@ -24,6 +24,8 @@ int main(void)
 	 * Call the peripheral setup functions 
 	 */
 
+	GPIO_init();
+
 	for (int i = 0; i < 8; i++){
 		GPIO_delluminate_LED(i);
 	}
@@ -31,7 +33,6 @@ int main(void)
 
 	GPIO_illuminate_LED(2);
 
-	GPIO_init();
 	//NVIC_init();
 	DAC_init();
 	setupTimer(SAMPLE_PERIOD);
