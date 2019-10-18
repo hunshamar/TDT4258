@@ -4,6 +4,7 @@
 #include "math.h"
 #include <stdbool.h>
 #include "timer.h"
+#include "gpio.h"
 
 
 static int amplitude = 100;
@@ -150,6 +151,7 @@ void set_sound_type(uint8_t sound)
 
 void startup_tune()
 {
+    GPIO_illuminate_LED(4);
     set_sound_type(1);
     frequency = 261;//C
     for (int i = 0; i < 15000; ++i)
@@ -157,6 +159,7 @@ void startup_tune()
         busy_wait();
         play_sound();
     }
+    GPIO_illuminate_LED(5);
     set_sound_type(1);
     frequency = 330;//E
     for (int i = 0; i < 15000; ++i)
@@ -166,6 +169,7 @@ void startup_tune()
     }
     set_sound_type(1);
     frequency = 392;//G
+    GPIO_illuminate_LED(6);
     for (int i = 0; i < 15000; ++i)
     {
         busy_wait();

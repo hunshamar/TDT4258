@@ -31,7 +31,11 @@ int main(void)
 		GPIO_delluminate_LED(i);
 	}
 
-	busy_wait();
+	GPIO_illuminate_LED(1);
+
+	for(int i = 0; i < 100; i++){
+		busy_wait();
+	}	
 	
 	
 	GPIO_illuminate_LED(2);
