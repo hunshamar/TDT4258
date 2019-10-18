@@ -3,6 +3,7 @@
 #include "efm32gg.h"
 #include "math.h"
 #include <stdbool.h>
+#include "timer.h"
 
 #define PI 3.14159265
 
@@ -150,5 +151,26 @@ void set_sound_type(uint8_t sound)
 
 void startup_tune()
 {
-    
+    set_sound_type(1);
+    frequency = 261;//C
+    for (int i = 0; i < 15000; ++i)
+    {
+        play_sound();
+        busy_wait();
+    }
+    set_sound_type(1);
+    frequency = 330;//E
+    for (int i = 0; i < 15000; ++i)
+    {
+        play_sound();
+        busy_wait();
+    }
+    set_sound_type(1);
+    frequency = 392;
+    for (int i = 0; i < 15000; ++i)
+    {
+        play_sound();
+        busy_wait();
+    }
+    set_sound_type(0);
 }
