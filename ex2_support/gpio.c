@@ -51,5 +51,5 @@ int button_poll()
 			return i;
 		}
 	}
-	return 0;
+	return -1;
 }

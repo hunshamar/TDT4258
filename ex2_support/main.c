@@ -38,7 +38,9 @@ int main(void)
 	{
 		busy_wait();
 		int button_pressed = button_poll();
-		GPIO_illuminate_LED(button_pressed);
+		if (button_pressed != -1){
+			GPIO_illuminate_LED(button_pressed);
+		}
 		switch(button_pressed)
 		{
 			case 0:
