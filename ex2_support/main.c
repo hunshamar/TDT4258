@@ -55,13 +55,12 @@ int main(void)
 		busy_wait();
 		int button_pressed = button_poll();
 		if (button_pressed != -1){
-			//GPIO_illuminate_LED(button_pressed);
+			GPIO_illuminate_LED(button_pressed);
 		}
 		switch(button_pressed)
 		{
 			case 0:
 				set_sound_type(0);
-				GPIO_illuminate_LED(0);
 				break;
 			case 1:
 				set_sound_type(1);
@@ -81,9 +80,6 @@ int main(void)
 				change_volume(-20);
 				break;
 			default:
-				for (int i = 0; i < 8; i++){
-					GPIO_delluminate_LED(i);
-				}
 				break;
 		}
 		play_sound();
