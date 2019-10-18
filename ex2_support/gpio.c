@@ -46,7 +46,7 @@ int button_poll()
 {
 	for (int i = 0; i < 8; ++i)
 	{
-		if(button_pressed(i))
+		if(GPIO_button_pressed(i))
 		{
 			return i;
 		}
