@@ -32,6 +32,7 @@ int main(void)
 	setupNVIC();
 	setupDAC();
 	setupTimer(SAMPLE_PERIOD);
+	startup_tune();
 	//setSleep(0b110);
 	
 	while(true)
