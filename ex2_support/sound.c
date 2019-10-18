@@ -5,17 +5,16 @@
 #include <stdbool.h>
 #include "timer.h"
 
-#define PI 3.14159265
 
-int amplitude = 100;
-uint8_t sound_type = 0;
-double time = 0.0;
-int sawtooth_val = 0;
-int frequency = 250;
-bool square_high = false;
-int square_count = 0;
-uint16_t triangle_val = 0;
-bool triangle_rise = true;
+static int amplitude = 100;
+static uint8_t sound_type = 0;
+static double time = 0.0;
+static int sawtooth_val = 0;
+static int frequency = 250;
+static bool square_high = false;
+static int square_count = 0;
+static uint16_t triangle_val = 0;
+static bool triangle_rise = true;
 
 
 
