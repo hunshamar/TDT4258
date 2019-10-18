@@ -23,6 +23,12 @@ int main(void)
 	/*
 	 * Call the peripheral setup functions 
 	 */
+
+	for (int i = 0; i < 8; i++){
+		GPIO_delluminate_LED(i);
+	}
+
+
 	GPIO_init();
 	//NVIC_init();
 	DAC_init();
@@ -30,16 +36,17 @@ int main(void)
 	startup_tune();
 	//setSleep(0b110);
 	
-	for (int i = 0; i < 8; i++){
-		GPIO_delluminate_LED(i);
-	}
+	
+	GPIO_illuminate_LED(3);
+
+	GPIO_illuminate_LED(7);
 
 	while(true)
 	{
 		busy_wait();
 		int button_pressed = button_poll();
 		if (button_pressed != -1){
-			GPIO_illuminate_LED(button_pressed);
+			//GPIO_illuminate_LED(button_pressed);
 		}
 		switch(button_pressed)
 		{
